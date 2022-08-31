@@ -51,9 +51,7 @@ using namespace osuCrypto;
 #include <vector>
 #include <stdarg.h>
 
-// from callgring dump
-// cmd:  ./bin/frontend.exe -partyID 0 -hashSize 1000000 -fieldSize 132
-// -partiesFile bin/Parties.txt -reportStatistics 0 -internalIterationsNumber 1
+// Usage : ./bin/frontend.exe -partyID 0 -hashSize 1000000 -fieldSize 132 -partiesFile bin/Parties.txt -reportStatistics 0 -internalIterationsNumber 1
 
 int main(int argc, char **argv)
 {
