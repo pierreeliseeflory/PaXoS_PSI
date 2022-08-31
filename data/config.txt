@@ -1,0 +1,7 @@
+# Receiver
+party_0_ip = 127.0.0.1
+party_0_port = 8080
+
+# Sender
+party_1_ip = 127.0.0.1
+party_1_port = 8088

@@ -8,11 +8,11 @@
 #include <libPSI/PsiDefines.h>
 #include <libPSI/PRTY2/PrtyMOtReceiver.h>
 #include <libPSI/PRTY2/PrtyMOtSender.h>
+#include <libPSI/Tools/mx_132_by_583.h>
 #include <libPSI/Tools/mx_72_by_462.h>
 #include <libPSI/Tools/mx_84_by_495.h>
 #include <libPSI/Tools/mx_90_by_495.h>
 #include <libPSI/Tools/mx_65_by_448.h>
-#include <libPSI/Tools/mx_132_by_583.h>
 #include <libPSI/Tools/mx_138_by_594.h>
 #include <libPSI/Tools/mx_144_by_605.h>
 #include <libPSI/Tools/mx_150_by_616.h>
@@ -24,11 +24,13 @@
 #include <libPSI/Tools/mx_217_by_744.h>
 #include <libPSI/Tools/mx_231_by_768.h>
 #include <libPSI/Tools/mx_238_by_776.h>
+
 #include <libOTe/Tools/Tools.h>
 #include <libOTe/Tools/LinearCode.h>
 #include <cryptoTools/Network/Channel.h>
 #include <cryptoTools/Network/Endpoint.h>
 #include <cryptoTools/Common/Log.h>
+#include <cryptoTools/Common/Matrix.h>
 
 #include <libscapi/include/comm/MPCCommunication.hpp>
 #include <libscapi/include/cryptoInfra/Protocol.hpp>
@@ -53,7 +55,7 @@ protected:
     int partyId;
     int times; //number of times to run the run function
     int iteration; //number of the current iteration
-    int numOTs, tableRealSize, hashSize, fieldSize, fieldSizeBytes;
+    int numOTs, tableRealSize, hashSize, fieldSize, fieldSizeBytes, bytesPerHash;
     int gamma;
     bool isMalicious;
 
@@ -72,6 +74,8 @@ protected:
     boost::asio::io_service io_service;
 
     LinearCode code;
+
+    oc::Matrix<uint64_t> xors2;
 
 public:
 
@@ -106,7 +110,7 @@ private :
     void computeXors();
     void checkVariables(vector<byte> & variables);
 
-    void receiveSenderXors();
+    std::vector<u64> receiveSenderXors();
 public:
 
     Receiver(int argc, char *argv[]);
@@ -120,8 +124,6 @@ private :
     PrtyMOtSender sender;
     BitVector baseChoice;
 
-
-    vector<uint64_t> xors;
 
     void runOOS();
 

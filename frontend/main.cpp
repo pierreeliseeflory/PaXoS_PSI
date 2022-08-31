@@ -20,7 +20,6 @@ using namespace osuCrypto;
 #include <cryptoTools/Common/Timer.h>
 #include <cryptoTools/Common/Log.h>
 
-
 #include "libOTe/Tools/LinearCode.h"
 #include "libOTe/Tools/bch511.h"
 #include "libOTe/NChooseOne/Oos/OosNcoOtReceiver.h"
@@ -48,22 +47,43 @@ using namespace osuCrypto;
 #include <cryptoTools/Common/Log.h>
 #include "PsiDefines.h"
 
-
 #include <thread>
 #include <vector>
 #include <stdarg.h>
 
+// from callgring dump
+// cmd:  ./bin/frontend.exe -partyID 0 -hashSize 1000000 -fieldSize 132
+// -partiesFile bin/Parties.txt -reportStatistics 0 -internalIterationsNumber 1
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
     CmdParser parser;
+    std::cout << std::endl
+              << "=> Parsing arguments" << std::endl
+              << std::endl;
     auto parameters = parser.parseArguments("", argc, argv);
     int partyID = stoi(parser.getValueByKey(parameters, "partyID"));
 
-    if (partyID == 0) {
+    if (partyID == 0)
+    {
+        std::cout << std::endl
+                  << "=> Initialization" << std::endl
+                  << std::endl;
         Receiver receiver(argc, argv);
+        std::cout << std::endl
+                  << "=> Running PSI" << std::endl
+                  << std::endl;
         receiver.run();
-    } else {
+    }
+    else
+    {
+        std::cout << std::endl
+                  << "=> Initialization" << std::endl
+                  << std::endl;
         Sender sender(argc, argv);
+        std::cout << std::endl
+                  << "=> Running PSI" << std::endl
+                  << std::endl;
         sender.run();
     }
 }

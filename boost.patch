@@ -1,0 +1,20 @@
+diff --git a/thirdparty/linux/boost.get b/thirdparty/linux/boost.get
+index cf299e7..c94f998 100644
+--- a/thirdparty/linux/boost.get
++++ b/thirdparty/linux/boost.get
+@@ -3,7 +3,7 @@
+ set -e
+ 
+ if [ ! -d boost ]; then
+-    wget -c 'https://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_65_1.tar.bz2' -O ./boost_1_65_1.tar.bz2
++    wget -c 'https://boostorg.jfrog.io/artifactory/main/release/1.65.1/source/boost_1_65_1.tar.bz2' -O ./boost_1_65_1.tar.bz2
+     tar xfj boost_1_65_1.tar.bz2
+     mv boost_1_65_1 boost
+     rm  boost_1_65_1.tar.bz2
+@@ -12,5 +12,5 @@ fi
+ cd ./boost
+ if [ ! -d includes ]; then
+     ./bootstrap.sh
+-    ./b2 stage --with-system --with-thread link=static -mt 
++    ./b2 install --with-system --with-thread link=static -mt 
+ fi
